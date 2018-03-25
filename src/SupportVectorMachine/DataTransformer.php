@@ -17,9 +17,15 @@ class DataTransformer
             $numericLabels = self::numericLabels($labels);
         }
 
+        // Locale needs to be set to en, because libsvm only accepts dots as decimal points.
+        $oldlocale = setlocale(LC_NUMERIC, "0");
+        setlocale(LC_NUMERIC, 'en');
+
         foreach ($labels as $index => $label) {
             $set .= sprintf('%s %s %s', ($targets ? $label : $numericLabels[$label]), self::sampleRow($samples[$index]), PHP_EOL);
         }
+
+        setlocale(LC_NUMERIC, $oldlocale);
 
         return $set;
     }
@@ -34,10 +40,17 @@ class DataTransformer
             $samples = [$samples];
         }
 
+
+        // Locale needs to be set to en, because libsvm only accepts dots as decimal points.
+        $oldlocale = setlocale(LC_NUMERIC, "0");
+        setlocale(LC_NUMERIC, 'en');
+
         $set = '';
         foreach ($samples as $sample) {
             $set .= sprintf('0 %s %s', self::sampleRow($sample), PHP_EOL);
         }
+
+        setlocale(LC_NUMERIC, $oldlocale);
 
         return $set;
     }
