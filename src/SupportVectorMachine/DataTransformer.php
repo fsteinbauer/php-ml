@@ -18,7 +18,7 @@ class DataTransformer
         }
 
         // Locale needs to be set to en, because libsvm only accepts dots as decimal points.
-        $oldlocale = setlocale(LC_NUMERIC, "0");
+        $oldlocale = setlocale(LC_NUMERIC, '0');
         setlocale(LC_NUMERIC, 'en');
 
         foreach ($labels as $index => $label) {
@@ -40,9 +40,8 @@ class DataTransformer
             $samples = [$samples];
         }
 
-
         // Locale needs to be set to en, because libsvm only accepts dots as decimal points.
-        $oldlocale = setlocale(LC_NUMERIC, "0");
+        $oldlocale = setlocale(LC_NUMERIC, '0');
         setlocale(LC_NUMERIC, 'en');
 
         $set = '';
